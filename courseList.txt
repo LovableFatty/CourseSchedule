@@ -1,5 +1,6 @@
-CSC 10, null, null
-CSC 15, CSC 10, null
-CSC 20, CSC 15, null
-CSC 28, CSC 20, CSC 130
-CSC 35, CSC 20 / CSC 28, null
+CSC 10 | null | null | 92
+CSC 15 | CSC 10 | null | 90
+CSC 20 | CSC 15 | null | 86
+CSC 28 | CSC 20 | CSC 20 | 95
+CSC 35 | CSC 20, CSC 28 | null | 84
+CSC 130 | CSC 20, CSC 28 | CSC 28 | 89

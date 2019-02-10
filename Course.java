@@ -5,41 +5,37 @@ class Course {
 	private String   courseName;				// Course name as a string
 	private int      courseNodeValue;			// Node value used only for the topo sort
 	private int      averageGrade;				// Average grade as an int value out of 100
-	private LinkedList<Course> prerequisites;	// List of course prerequisites
-	private LinkedList<Course> corequisites;	// List of course corequisites
+	private Course[] prerequisites;	// List of course prerequisites
+	private Course[] corequisites;	// List of course corequisites
 	
 	// Course constructor
-	public Course(String name, int value, int grade) {
+	public Course(int value, String name, int grade, String prerequisites, String corequisites) {
 		courseName =      name;
 		courseNodeValue = value;
 		averageGrade =    grade;
+		String[] prerequisiteNames = prerequisites.split(",");
+		String[] corequisitesNames = corequisites.split(",");
 	}
 	
-	public void setPrerequisites() {
-		try (FileReader file = new FileReader("courseList.txt")) {}
-		catch (IOException e) { System.out.println("File Read Error"); }
-		Scanner scanner = new Scanner("courseList.txt");
-		int i = 0;
-		while (scanner.hasNextLine()) {
-			String str = scanner.nextLine();
-			
-			i++;
-		}
+	// ====== Getter Methods ====== //
+	
+	public String getCourseName() {
+		return courseName;
 	}
 	
-	public void setCorequisites() {
-		
+	public int getCourseNodeValue() {
+		return courseNodeValue;
 	}
 	
-	public LinkedList<Course> getCorequisites() {
+	public int getAverageGrade() {
+		return averageGrade;
+	}
+	
+	public Course[] getCorequisites() {
 		return corequisites;
 	}
 	
-	public LinkedList<Course> getPrerequisites() {
+	public Course[] getPrerequisites() {
 		return prerequisites;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }

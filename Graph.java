@@ -1,36 +1,51 @@
 import java.io.*; 
-import java.util.*; 
+import java.util.*;
 
 // This class represents a directed graph using adjacency list representation 
 class Graph { 
-	private int 				graphSize;   		// Total number of vertices
-	private LinkedList<Integer> adjacentNodes[]; 	// List of adjacent vertices
-	private String[] 			courses; 			// List of course names indexed using 
-	private Graph[][] 			concurrentClasses;	// List of classes that can be taken together
+	private int 				graphSize;   		   // Total number of vertices
+	private LinkedList<Integer> adjacentNodes[]; // List of adjacent vertices
+	private Course[] 			courses; 			   // List of course names indexed using 
+	private String[] 			courseData;			   // Initial list of all course data per course
 		
-	//Graph constructor
+	//Graph constructor - also initializes graph size
 	Graph(int size) { 
 		graphSize = size; 
 		adjacentNodes = new LinkedList[size]; 
-		for (int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i) 
 			adjacentNodes[i] = new LinkedList(); 
 	} 
 	
+	// Calculate the number of courses
+	int classListSize() throws IOException {
+		FileReader file = new FileReader("courseList.txt");
+		BufferedReader reader = new BufferedReader(file);
+		int size = 0;
+		while ((reader.readLine() != null))
+			size++;
+		return size;
+	}
+	
+	// Loop that iterates through each line in the text file and separate by commas
+	void addCourseData() throws IOException{
+		File file = new File("courseList.txt");		// File location for course data for the scanner
+		Scanner scanner = new Scanner(file);			// Scanner for reading list of course data
+		
+		courseData = new String[classListSize()];		// Create new array with size of number of classes
+		for (int i = 0; i < courseData.length; i++)	// Iterate through text file and save each line to array
+			courseData[i]  = scanner.nextLine();
+			
+	}
+	
 	// Function to add to array of course names
 	void addCourses() {
-		courses = new String[12];
-		courses[0] = "CSC 10";
-		courses[1] = "CSC 15";
-		courses[2] = "CSC 20";
-		courses[3] = "CSC 28";
-		courses[4] = "CSC 35";
-		courses[5] = "CSC 60";
-		courses[6] = "MATH 26A";
-		courses[7] = "MATH 30";
-		courses[8] = "MATH 26B";
-		courses[9] = "MATH 31";
-		courses[10] = "STAT 50";
-		courses[11] = "ENGR 115";	
+		courses = new Course[graphSize + 10];
+		for (int i = 0; i < graphSize; i++) {
+			String[] parsedData = new String[4];
+			parsedData = courseData[i].split("|"); //Integer.valueOf(parsedData[3].replaceAll("\\s+",""))
+			Course course = new Course(i , parsedData[0], 3, parsedData[1], parsedData[2]);
+		   courses[i] = course;
+      }	
 	}
 	
 	// Function for setting course prerequisites and corequisites
@@ -49,8 +64,7 @@ class Graph {
 	// A recursive function used by topologicalSort 
 	void topologicalSortUtil(int v, boolean visited[], Stack stack) 
 	{ 
-		// Mark the current node as visited. 
-		visited[v] = true; 
+		visited[v] = true; // Mark the current node as visited. 
 		int i; 
 
 		// Recursion for all the vertices adjacent to this vertex 
@@ -66,8 +80,7 @@ class Graph {
 	} 
 
 	// Main function for sorting. Uses topologicalSortUtil() recursively
-	void topologicalSort() 
-	{ 
+	void topologicalSort() { 
 		Stack stack = new Stack(); 
 
 		// Start each vertex as not visited
@@ -85,11 +98,11 @@ class Graph {
 			System.out.print(courses[(int) stack.pop()] + " --> "); 
 	} 
 
-	public static void main(String args[]) { 
+	public static void main(String args[]) throws IOException { 
 		// Create a graph given in the above diagram 
 		Graph roadMap = new Graph(5);
+      roadMap.addCourseData();
 		roadMap.addCourses();
-		roadMap.addRequisites();
 		System.out.println("The following is the optimized class order"); 
 		roadMap.topologicalSort();
 	} 
