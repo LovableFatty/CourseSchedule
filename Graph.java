@@ -17,12 +17,25 @@ class Graph {
 	
 	// Function to add to array of course names
 	void addCourses() {
-		courses = new String[10];
-		courses[0] = "csc10";
-		courses[1] = "csc15";
-		courses[2] = "csc20";
-		courses[3] = "csc28";
-		courses[4] = "csc35";
+		courses = new String[12];
+		courses[0] = "CSC 10";
+		courses[1] = "CSC 15";
+		courses[2] = "CSC 20";
+		courses[3] = "CSC 28";
+		courses[4] = "CSC 35";
+		courses[5] = "CSC 60";
+		
+		courses[6] = "MATH 26A";
+		courses[7] = "MATH 30";
+		
+		courses[8] = "MATH 26B";
+		courses[9] = "MATH 31";
+		
+		courses[10] = "STAT 50";
+		courses[11] = "ENGR 115";
+		
+		
+		
 	}
 	
 	// Function for setting course prerequisites and corequisites
@@ -43,7 +56,7 @@ class Graph {
 	{ 
 		// Mark the current node as visited. 
 		visited[v] = true; 
-		Integer i; 
+		int i; 
 
 		// Recursion for all the vertices adjacent to this vertex 
 		Iterator<Integer> it = adj[v].iterator(); 
