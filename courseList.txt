@@ -1,5 +1,7 @@
-CSC 10, null, null======
-CSC 15, CSC 10, null======
-CSC 20, CSC 15, null======
-CSC 28, CSC 20, CSC 130=====
-CSC 35, CSC 20 / CSC 28, null=====
+CSC 10, null, null
+CSC 15, CSC 10, null
+CSC 20, CSC 15, null
+CSC 28, CSC 20, CSC 130
+CSC 35, CSC 20 / CSC 28, null
+CSC 60, CSC 20, null
+CSC 130, CSC 20 / CSC 28, null

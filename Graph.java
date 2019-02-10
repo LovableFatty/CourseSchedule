@@ -5,7 +5,7 @@ import java.util.*;
 class Graph { 
 	private int 				graphSize;   		// Total number of vertices
 	private LinkedList<Integer> adjacentNodes[]; 	// List of adjacent vertices
-	private String[] 			courses; 			// List of course names indexed using 
+	public String[] 			courses; 			// List of course names indexed using 
 	private Graph[][] 			concurrentClasses;	// List of classes that can be taken together
 		
 	//Graph constructor
@@ -17,32 +17,30 @@ class Graph {
 	} 
 	
 	// Function to add to array of course names
-	void addCourses() {
-		courses = new String[12];
+	public void addCourses() {
+		courses = new String[7];
 		courses[0] = "CSC 10";
 		courses[1] = "CSC 15";
 		courses[2] = "CSC 20";
 		courses[3] = "CSC 28";
 		courses[4] = "CSC 35";
 		courses[5] = "CSC 60";
-		courses[6] = "MATH 26A";
-		courses[7] = "MATH 30";
-		courses[8] = "MATH 26B";
-		courses[9] = "MATH 31";
-		courses[10] = "STAT 50";
-		courses[11] = "ENGR 115";	
+		courses[6] = "CSC 130";
 	}
 	
 	// Function for setting course prerequisites and corequisites
-	public void addRequisites() {
-		this.addRequisite(0,1); 
-		this.addRequisite(1,2); 
-		this.addRequisite(2,3); 
-		this.addRequisite(2,4); 
+	public void addPrequisites() {
+		this.addPrequisite(0,1); 
+		this.addPrequisite(1,2); 
+		this.addPrequisite(2,3); 
+		this.addPrequisite(2,4); 
+        this.addPrequisite(2,6);
+        this.addPrequisite(3,6);
+        this.addPrequisite(4,5); 
 	}
 	
 	// Function to add an edge into the graph 
-	public void addRequisite(int sourceVertice, int endVertice) {
+	public void addPrequisite(int sourceVertice, int endVertice) {
 		adjacentNodes[sourceVertice].add(endVertice);
 	} 
 
@@ -87,10 +85,10 @@ class Graph {
 
 	public static void main(String args[]) { 
 		// Create a graph given in the above diagram 
-		Graph roadMap = new Graph(5);
+		Graph roadMap = new Graph(7);
 		roadMap.addCourses();
-		roadMap.addRequisites();
-		System.out.println("The following is the optimized class order"); 
+		roadMap.addPrequisites();
+		System.out.println("The following is a optimized class order"); 
 		roadMap.topologicalSort();
 	} 
 }
