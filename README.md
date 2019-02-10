@@ -1,2 +1,2 @@
 # CourseSchedule
-Algo for a live schedule planner
+Algo for a course schedule planner
