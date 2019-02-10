@@ -15,31 +15,11 @@ class Course {
 		averageGrade =    grade;
 	}
 	
-	public void setPrerequisites() {
-		try (FileReader file = new FileReader("courseList.txt")) {}
-		catch (IOException e) { System.out.println("File Read Error"); }
-		Scanner scanner = new Scanner("courseList.txt");
-		int i = 0;
-		while (scanner.hasNextLine()) {
-			String str = scanner.nextLine();
-			
-			i++;
-		}
-	}
-	
-	public void setCorequisites() {
-		
-	}
-	
 	public LinkedList<Course> getCorequisites() {
 		return corequisites;
 	}
 	
 	public LinkedList<Course> getPrerequisites() {
 		return prerequisites;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }

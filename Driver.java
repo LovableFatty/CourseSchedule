@@ -1,26 +1,25 @@
 import java.io.*;
 import java.util.*;
+import java.io.FileReader;
 
 class Driver {
-	public static void main(String[] args) {
-		LinkedList<String> courseData[];	// Initial list of all course data per course
-		LinkedList<Course> courseList[]; 	// List of course objects from text file
-
-		//try (FileReader file = new FileReader("courseList.txt")) {}			//Read file of class information
-		//catch (IOException e) { System.out.println("File Read Error"); }	//Produce error if file is not found
-		Scanner scanner = new Scanner("courseList.txt");
+	public static void main(String[] args) throws IOException {	
+		File file = new File("courseList.txt");				// File location for course data for the scanner
+		Scanner scanner = new Scanner(file);				// Scanner for reading list of course data
+		String[] courseData = new String[classListSize()];	// Initial list of all course data per course
 		
-		for (int i = 0; i < classListSize(); i++) {
-			String scannedLine = scanner.nextLine();
-			courseData[i] = new LinkedList();
-			String[] output = scannedLine.split(",");
-		}
+		// Loop that iterates through each line in the text file and separate by commas
+		for (int i = 0; i < courseData.length; i++)
+			courseData[i]  = scanner.nextLine();
 	}
 	
-	public static int classListSize() {
-		Scanner scanner = new Scanner("courseList.txt");
+	// Calculate the number of courses
+	public static int classListSize() throws IOException {
+		FileReader file = new FileReader("courseList.txt");
+		BufferedReader reader = new BufferedReader(file);
 		int size = 0;
-		while (scanner.hasNextLine()) { size++; }
+		while ((reader.readLine() != null))
+			size++;
 		return size;
 	}
 }
